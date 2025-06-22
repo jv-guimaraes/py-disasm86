@@ -1,5 +1,6 @@
 import argparse
 import sys
+from typing import Dict, Tuple, Optional, List
 
 REG_FIELD_MAP = {
     0: {0b000:'al', 0b001:'cl', 0b010:'dl', 0b011:'bl', 0b100:'ah', 0b101:'ch', 0b110:'dh', 0b111:'bh'},
@@ -47,7 +48,7 @@ SINGLE_BYTE_MNEMONICS = {
     0xfa: "cli", 0xfb: "sti", 0xfc: "cld", 0xfd: "std"
 }
 
-def get_rm_string(mod, rm, data):
+def get_rm_string(mod: int, rm: int, data: bytes) -> Tuple[Optional[str], int]:
     if mod == 0b11: return None, 0
     
     if mod == 0b00 and rm == 0b110:
@@ -66,7 +67,7 @@ def get_rm_string(mod, rm, data):
     sign = "+" if disp_val >= 0 else "-"
     return f"{addr[:-1]}{sign}0x{abs(disp_val):x}]", disp_bytes
 
-def disassemble_reg_mem_instruction(mnemonic, data):
+def disassemble_reg_mem_instruction(mnemonic: str, data: bytes) -> Tuple[str, int]:
     opcode, mod_rm_byte = data[0], data[1]
     
     is_lea_lds_les = mnemonic in ["lea", "lds", "les"]
@@ -89,7 +90,7 @@ def disassemble_reg_mem_instruction(mnemonic, data):
     op1, op2 = (reg_operand, rm_operand) if d == 1 else (rm_operand, reg_operand)
     return f"{mnemonic} {op1},{op2}", length
 
-def disassemble_immediate_to_acc_instruction(mnemonic, data):
+def disassemble_immediate_to_acc_instruction(mnemonic: str, data: bytes) -> Tuple[str, int]:
     w = data[0] & 1
     length = 2 if w == 0 else 3
     if len(data) < length: return "INVALID", length
@@ -97,7 +98,7 @@ def disassemble_immediate_to_acc_instruction(mnemonic, data):
     imm = data[1] if w == 0 else int.from_bytes(data[1:3], 'little')
     return f"{mnemonic} {'al' if w==0 else 'ax'},{imm:#x}", length
 
-def disassemble_group_instruction(opcode, data):
+def disassemble_group_instruction(opcode: int, data: bytes) -> Tuple[str, int]:
     w = 1 if opcode in [0x8f, 0xff] or (opcode & 1) else opcode & 1
     s = (opcode >> 1) & 1 if opcode in [0x80, 0x81, 0x83] else 0
 
@@ -135,7 +136,7 @@ def disassemble_group_instruction(opcode, data):
 
     return f"{mnemonic} {operand}", length
 
-def disassemble_shift_rotate_instruction(data):
+def disassemble_shift_rotate_instruction(data: bytes) -> Tuple[str, int]:
     opcode, mod_rm_byte = data[0], data[1]
     v, w = (opcode >> 1) & 1, opcode & 1
     mod, op_ext, rm_code = (mod_rm_byte >> 6) & 3, (mod_rm_byte >> 3) & 7, mod_rm_byte & 7
@@ -153,11 +154,11 @@ def disassemble_shift_rotate_instruction(data):
         
     return f"{mnemonic} {operand},{count_operand}", 2 + disp_bytes
 
-def disassemble_jump_instruction(mnemonic, data, origin):
+def disassemble_jump_instruction(mnemonic: str, data: bytes, origin: int) -> Tuple[str, int]:
     length, disp = 2, int.from_bytes(data[1:2], 'little', signed=True)
     return f"{mnemonic} short {origin + length + disp:#x}", length
 
-def _disassemble_instruction(data, origin):
+def _disassemble_instruction(data: bytes, origin: int) -> Tuple[str, int]:
     if not data: return "No data", 0
     opcode = data[0]
 
@@ -274,7 +275,7 @@ def _disassemble_instruction(data, origin):
     if opcode in GROUP_OPCODE_MAP:
         return disassemble_group_instruction(opcode, data)
 
-    op_type_map = {
+    op_type_map: Dict[str, Dict[int, str]] = {
         "rm":{0b000000:"add", 0b000100:"adc", 0b000110:"sbb", 0b000010:"or", 0b001000:"and", 0b001010:"sub", 0b001100:"xor", 0b001110:"cmp", 0b100001:"test", 0b100010:"mov"},
         "acc":{0b0000010:"add", 0b0001010:"adc", 0b0001110:"sbb", 0b0000110:"or", 0b0010010:"and", 0b0010110:"sub", 0b0011010:"xor", 0b0011110:"cmp", 0b1010100:"test"}
     }
@@ -286,12 +287,13 @@ def _disassemble_instruction(data, origin):
 
     return f"db {opcode:#04x}", 1
 
-def disassemble(data, origin=0):
+def disassemble(data: bytes, origin: int = 0) -> Tuple[str, int]:
     if not data: return "No data", 0
     
     original_data = data
-    prefixes, segment_prefix = [], None
-    prefix_op_map = {0x26:"es", 0x2e:"cs", 0x36:"ss", 0x3e:"ds", 0xf0:"lock", 0xf2:"repne", 0xf3:"rep"}
+    prefixes: List[str] = []
+    segment_prefix: Optional[str] = None
+    prefix_op_map: Dict[int, str] = {0x26:"es", 0x2e:"cs", 0x36:"ss", 0x3e:"ds", 0xf0:"lock", 0xf2:"repne", 0xf3:"rep"}
 
     while data and data[0] in prefix_op_map:
         prefix_str = prefix_op_map[data[0]]
@@ -318,7 +320,7 @@ def disassemble(data, origin=0):
 
     return final_asm, length
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="A simple 8086 disassembler.")
     parser.add_argument("filename", help="The binary file to disassemble.")
     parser.add_argument("-o", "--origin", type=lambda x: int(x, 0), default=0,
