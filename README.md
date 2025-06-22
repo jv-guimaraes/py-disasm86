@@ -1,6 +1,6 @@
 # disasm86 - Intel 8086 Disassembler
 
-A simple python command-line tool to disassemble 16-bit Intel 8086 binary code.
+A simple python command-line tool to disassemble 16-bit Intel 8086 binary code. In `manual_info` you can find all the data from the user manual that was used to implement it.
 
 ## Usage
 
