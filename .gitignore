@@ -1,0 +1,77 @@
+# Byte-code files
+*.pyc
+__pycache__/
+*.pyd
+*.pyo
+
+# Virtual environment
+venv/
+env/
+.venv/
+.python-version
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+.eggs/
+sdist/
+
+# macOS
+.DS_Store
+.Trashes
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDEs and Editors
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Vim
+*.swp
+*.swo
+
+# Emacs
+*~
+#*#
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+.jupyter/
+
+# Test / Coverage
+.coverage
+.pytest_cache/
+htmlcov/
+.nox/ # Nox
+.mypy_cache/
+
+# Logs and databases
+*.log
+*.sqlite3 # Dev database, if applicable (e.g., Django's default db.sqlite3)
+*.db
+!db.sqlite3
+
+# Documentation
+docs/_build/ # Sphinx build output
+
+# Miscellaneous
+*.bak
+*.tmp
+*.sage.py # SageMath generated files
+
+# Docker related
+.dockerignore
+docker-compose.yml.orig
+*.dockerignore
+
+# Pip cache files
+pip-log.txt

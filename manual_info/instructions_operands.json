@@ -1,0 +1,372 @@
+{
+  "AAA": [],
+  "AAD": [],
+  "AAM": [],
+  "AAS": [],
+  "ADC": [
+    "REG, memory",
+    "memory, REG",
+    "REG, REG",
+    "memory, immediate",
+    "REG, immediate"
+  ],
+  "ADD": [
+    "REG, memory",
+    "memory, REG",
+    "REG, REG",
+    "memory, immediate",
+    "REG, immediate"
+  ],
+  "AND": [
+    "REG, memory",
+    "memory, REG",
+    "REG, REG",
+    "memory, immediate",
+    "REG, immediate"
+  ],
+  "CALL": [
+    "procedure name",
+    "label",
+    "4-byte address"
+  ],
+  "CBW": [],
+  "CLC": [],
+  "CLD": [],
+  "CLI": [],
+  "CMC": [],
+  "CMP": [
+    "REG, memory",
+    "memory, REG",
+    "REG, REG",
+    "memory, immediate",
+    "REG, immediate"
+  ],
+  "CMPSB": [],
+  "CMPSW": [],
+  "CWD": [],
+  "DAA": [],
+  "DAS": [],
+  "DEC": [
+    "REG",
+    "memory"
+  ],
+  "DIV": [
+    "REG",
+    "memory"
+  ],
+  "HLT": [],
+  "IDIV": [
+    "REG",
+    "memory"
+  ],
+  "IMUL": [
+    "REG",
+    "memory"
+  ],
+  "IN": [
+    "AL, im.byte",
+    "AL, DX",
+    "AX, im.byte",
+    "AX, DX"
+  ],
+  "INC": [
+    "REG",
+    "memory"
+  ],
+  "INT": [
+    "immediate byte"
+  ],
+  "INTO": [],
+  "IRET": [],
+  "JA": [
+    "label"
+  ],
+  "JAE": [
+    "label"
+  ],
+  "JB": [
+    "label"
+  ],
+  "JBE": [
+    "label"
+  ],
+  "JC": [
+    "label"
+  ],
+  "JCXZ": [
+    "label"
+  ],
+  "JE": [
+    "label"
+  ],
+  "JG": [
+    "label"
+  ],
+  "JGE": [
+    "label"
+  ],
+  "JL": [
+    "label"
+  ],
+  "JLE": [
+    "label"
+  ],
+  "JMP": [
+    "label",
+    "4-byte address"
+  ],
+  "JNA": [
+    "label"
+  ],
+  "JNAE": [
+    "label"
+  ],
+  "JNB": [
+    "label"
+  ],
+  "JNBE": [
+    "label"
+  ],
+  "JNC": [
+    "label"
+  ],
+  "JNE": [
+    "label"
+  ],
+  "JNG": [
+    "label"
+  ],
+  "JNGE": [
+    "label"
+  ],
+  "JNL": [
+    "label"
+  ],
+  "JNLE": [
+    "label"
+  ],
+  "JNO": [
+    "label"
+  ],
+  "JNP": [
+    "label"
+  ],
+  "JNS": [
+    "label"
+  ],
+  "JNZ": [
+    "label"
+  ],
+  "JO": [
+    "label"
+  ],
+  "JP": [
+    "label"
+  ],
+  "JPE": [
+    "label"
+  ],
+  "JPO": [
+    "label"
+  ],
+  "JS": [
+    "label"
+  ],
+  "JZ": [
+    "label"
+  ],
+  "LAHF": [],
+  "LDS": [
+    "REG, memory"
+  ],
+  "LEA": [
+    "REG, memory"
+  ],
+  "LES": [
+    "REG, memory"
+  ],
+  "LODSB": [],
+  "LODSW": [],
+  "LOOP": [
+    "label"
+  ],
+  "LOOPE": [
+    "label"
+  ],
+  "LOOPNE": [
+    "label"
+  ],
+  "LOOPNZ": [
+    "label"
+  ],
+  "LOOPZ": [
+    "label"
+  ],
+  "MOV": [
+    "REG, memory",
+    "memory, REG",
+    "REG, REG",
+    "memory, immediate",
+    "REG, immediate",
+    "SREG, memory",
+    "memory, SREG",
+    "REG, SREG",
+    "SREG, REG"
+  ],
+  "MOVSB": [],
+  "MOVSW": [],
+  "MUL": [
+    "REG",
+    "memory"
+  ],
+  "NEG": [
+    "REG",
+    "memory"
+  ],
+  "NOP": [],
+  "NOT": [
+    "REG",
+    "memory"
+  ],
+  "OR": [
+    "REG, memory",
+    "memory, REG",
+    "REG, REG",
+    "memory, immediate",
+    "REG, immediate"
+  ],
+  "OUT": [
+    "im.byte, AL",
+    "im.byte, AX",
+    "DX, AL",
+    "DX, AX"
+  ],
+  "POP": [
+    "REG",
+    "SREG",
+    "memory"
+  ],
+  "POPA": [],
+  "POPF": [],
+  "PUSH": [
+    "REG",
+    "SREG",
+    "memory",
+    "immediate"
+  ],
+  "PUSHA": [],
+  "PUSHF": [],
+  "RCL": [
+    "memory, immediate",
+    "REG, immediate",
+    "memory, CL",
+    "REG, CL"
+  ],
+  "RCR": [
+    "memory, immediate",
+    "REG, immediate",
+    "memory, CL",
+    "REG, CL"
+  ],
+  "REP": [
+    "chain instruction"
+  ],
+  "REPE": [
+    "chain instruction"
+  ],
+  "REPNE": [
+    "chain instruction"
+  ],
+  "REPNZ": [
+    "chain instruction"
+  ],
+  "REPZ": [
+    "chain instruction"
+  ],
+  "RET": [
+    "No operands",
+    "immediate"
+  ],
+  "RETF": [
+    "No operands",
+    "immediate"
+  ],
+  "ROL": [
+    "memory, immediate",
+    "REG, immediate",
+    "memory, CL",
+    "REG, CL"
+  ],
+  "ROR": [
+    "memory, immediate",
+    "REG, immediate",
+    "memory, CL",
+    "REG, CL"
+  ],
+  "SAHF": [],
+  "SAL": [
+    "memory, immediate",
+    "REG, immediate",
+    "memory, CL",
+    "REG, CL"
+  ],
+  "SAR": [
+    "memory, immediate",
+    "REG, immediate",
+    "memory, CL",
+    "REG, CL"
+  ],
+  "SBB": [
+    "REG, memory",
+    "memory, REG",
+    "REG, REG",
+    "memory, immediate",
+    "REG, immediate"
+  ],
+  "SCASB": [],
+  "SCASW": [],
+  "SHL": [
+    "memory, immediate",
+    "REG, immediate",
+    "memory, CL",
+    "REG, CL"
+  ],
+  "SHR": [
+    "memory, immediate",
+    "REG, immediate",
+    "memory, CL",
+    "REG, CL"
+  ],
+  "STC": [],
+  "STD": [],
+  "STI": [],
+  "STOSB": [],
+  "STOSW": [],
+  "SUB": [
+    "REG, memory",
+    "memory, REG",
+    "REG, REG",
+    "memory, immediate",
+    "REG, immediate"
+  ],
+  "TEST": [
+    "REG, memory",
+    "memory, REG",
+    "REG, REG",
+    "memory, immediate",
+    "REG, immediate"
+  ],
+  "XCHG": [
+    "REG, memory",
+    "memory, REG",
+    "REG, REG"
+  ],
+  "XLATB": [],
+  "XOR": [
+    "REG, memory",
+    "memory, REG",
+    "REG, REG",
+    "memory, immediate",
+    "REG, immediate"
+  ]
+}
